@@ -1,5 +1,20 @@
 # 拿到一个PHP系统，如何审计出0day
-## 0x01 文件上传漏洞
+跟把大象装冰箱里步骤是一样的，路由分析 -> 鉴权审计 -> 危险函数 -> 从危险函数到用户输入
+## 0x01 路由分析
+```
+# ThinkPHP路由学习
+具体见 -> ThinkPHP路由学习.md
+```
+## 0x02 鉴权审计
+```
+# 思路1
+cookie是否可以构造
+
+参考链接：
+https://mp.weixin.qq.com/s/47vfZ1v3j6ML22T9tJd4VA
+```
+## 0x03 危险函数
+### 01 文件上传漏洞
 ```
 文件上传函数或变量：
 move_uploaded_file、$_FILES
@@ -15,8 +30,7 @@ https://www.php.net/manual/zh/features.file-upload.post-method.php
 过滤演化：
 无任何验证 -> 前端JS验证 -> 验证文件头、验证Content-Type-> 黑名单验证 -> 白名单验证
 ```
-
-## 0x02 命令执行漏洞
+### 02 命令执行漏洞
 ```
 命令执行函数：
 system
@@ -47,14 +61,14 @@ https://www.php.net/manual/zh/function.system.php
 https://blog.csdn.net/Thunderclap_/article/details/129177629
 ```
 
-## 0x03 代码执行漏洞
+### 03 代码执行漏洞
 ```
 代码执行函数：
 eval
-
+asset
 ```
 
-## 0x04 文件读取漏洞
+### 04 文件读取漏洞
 ```
 文件读取函数：
 fopen 
@@ -63,8 +77,12 @@ fopen
 https://www.php.net/manual/zh/function.fopen.php
 ```
 
-## 0x05 文件包含漏洞
+### 05 文件包含漏洞
 ```
 文件包含函数：
 include、include_once、require、require_once
+```
+## 0x04 从危险函数到用户输入
+```
+就是从危险函数一点一点回溯审查代码
 ```
